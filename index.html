@@ -1,0 +1,217 @@
+<html>
+
+<head>
+    <title>Tetris</title>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <script type="text/javascript" src="html5slider.js"></script>
+    <style>
+        body {
+            background: #09050A;
+            text-align: center;
+            font-family: sans-serif;
+            color: #fff;
+            font-size: 2em;
+        }
+        
+        h2 {
+            font-size: 24px;
+        }
+        
+        a {
+            font-size: 16px;
+        }
+        
+        canvas {
+            border: solid .2em #fff;
+            height: 90vh;
+        }
+        
+        #todo {
+            position: absolute;
+            top: 2em;
+            right: 2em;
+            text-align: left;
+            padding-right: 4em;
+            padding-top: 2em;
+            color: coral;
+            font-size: 16px;
+        }
+        
+        #container {
+            -webkit-transition: all .7s ease;
+            transition: all .7s ease;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            position: absolute;
+            bottom: 1.2em;
+            right: 10%;
+            width: 400px;
+            height: 50px;
+            margin: -200px 0px 0px -214px;
+            padding: 10px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            background: coral;
+        }
+        
+        #audioPlayer {
+            position: relative;
+            bottom: 10px;
+            right: 25%;
+            display: inline-block;
+            padding: 5px;
+            background: coral;
+            /* added content? */
+            box-shadow: inset 0 1px 0px rgba(255, 255, 255, .2);
+        }
+        
+        button {
+            margin-right: 5px;
+            font-family: 'Press Start 2P', monospace;
+            height: auto;
+            border: none;
+            background-color: transparent;
+            color: white;
+            text-align: center;
+            display: inline-block;
+            height: 40px;
+            width: 40;
+        }
+        
+        input {
+            display: none\9!important;
+        }
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            border: 1px solid black;
+            position: absolute;
+            top: 18px;
+            display: block;
+            width: 100%;
+            height: 15px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            background-color: #242323;
+            left: 180px;
+            -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, .6);
+            -moz-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, .6);
+            box-shadow: inset 0px 4px 4px rgba(0, 0, 0, .6);
+        }
+        
+        input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid black;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            background: #80e4df;
+            /* Old browsers */
+            background: -webkit-linear-gradient(top, #80e4df 0%, #75dbd6 13%, #5ec4bf 33%, #57bbb6 47%, #419d99 80%, #378f8b 100%);
+            background: -moz-linear-gradient(top, #80e4df 0%, #75dbd6 13%, #5ec4bf 33%, #57bbb6 47%, #419d99 80%, #378f8b 100%);
+            background: -o-linear-gradient(top, #80e4df 0%, #75dbd6 13%, #5ec4bf 33%, #57bbb6 47%, #419d99 80%, #378f8b 100%);
+            background: linear-gradient(top, #80e4df 0%, #75dbd6 13%, #5ec4bf 33%, #57bbb6 47%, #419d99 80%, #378f8b 100%);
+            /* W3C */
+        }
+        
+        #play {
+            background-position: 6px 5px;
+        }
+        
+        #pause {
+            background-position: -32px 5px;
+        }
+        
+        #socialMedia {
+            position: absolute;
+            float: right;
+            left: 10%;
+            bottom: 1.2em;
+        }
+        
+        #range {
+            width: 20px !important;
+        }
+        
+        a:link {
+            color: aqua;
+        }
+        
+        a:visited {
+            color: darkslateblue;
+        }
+        
+        a:hover {
+            color: deepskyblue;
+        }
+        
+        a:active {
+            color: fuchsia;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="score"> </div>
+    <canvas id="tetris" width="240" height="400"></canvas>
+
+
+    <div id="todo">
+        <ul>Things I want to add</ul>
+        <li>controls hideable</li>
+        <li>Different Modes</li>
+        <li>Volume Control</li>
+        <li>Randomised colors</li>
+        <li>Clean up the code</li>
+        <li>preview of the next couple of blocks</li>
+        <li>pause button</li>
+        <li>2player mode?</li>
+        <li>Random Nic Cage</li>
+        <li>Credits for music: <a href="http://ozzed.net/">Ozzed</a> </li>
+    </div>
+    <div id="container">
+        <div id="audioPlayer" class="Player">
+            <button id="play"><i class="fa fa-play fa-2x" aria-hidden="true"></i></button>
+            <button id="pause"><i class="fa fa-pause fa-2x" aria-hidden="true"></i></button>
+            <button id="mute"><i class="fa fa-volume-up fa-2x" aria-hidden="true"></i></button>
+            <button id="skip"><i class="fa fa-forward fa-2x" aria-hidden="true"></i></button>
+            <input type="range" id="seek" value="0" max="" />
+
+        </div>
+    </div>
+    <div id="socialMedia">
+        <h3> Like this code? </h2>
+            <a href="#" id="portfolio">Portfolio</a>
+            <a href="#" id="github">Github</a>
+            <a href="#" id="twitter">Twitter</a>
+    </div>
+    <!--<div id="controls-container">
+        <div id="menu">
+            <button id="gamePause"></button>
+            <button id="gamePlay"></button>
+            <button id="hideControls"></button>
+            <button id="showControls"></button>
+        </div>
+        <div id="controls">
+            <h3>How to play</h3>
+            <h4>Keys</h4>
+            <i id="up" class="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
+            <i id="left" class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            <i id="down" class="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
+            <i id="right" class="fa fa-arrow-right fa-2x" aria-hidden="true"></i>
+        </div>
+    </div>-->
+    <script src="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script src="arena.js"></script>
+    <script src="Player.js"></script>
+    <script src="Tetris.js"></script>
+    <script src="main.js"></script>
+    <script src="Audio.js"></script>
+
+</body>
+
+</html>
