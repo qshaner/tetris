@@ -1,6 +1,6 @@
 //Audiofile stuff
 
-var myPlaylist = ["02%20Failien%20Funk.mp3", "04%20Shell%20Shock%20Shake.mp3", "06%20Going%20Down%20Tune.mp3", "08%20Filaments%20and%20Voids.mp3", "09%20Bonus%20Rage.mp3"];
+var myPlaylist = ["02 Failien Funk.mp3", "04 Shell Shock Shake.mp3", "06 Going Down Tune.mp3", "08 Filaments and Voids.mp3", "09 Bonus Rage.mp3"];
 
 var count = 0;
 var myMusic;
@@ -35,7 +35,7 @@ function sound(src) {
     });
 
 }
-myMusic = new sound("02%20Failien%20Funk.mp3");
+myMusic = new sound("02 Failien Funk.mp3");
 
 
 //Play Button
